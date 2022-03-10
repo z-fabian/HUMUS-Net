@@ -1,0 +1,41 @@
+accelerations:
+- 8
+batch_size: 1
+center_fractions:
+- 0.04
+challenge: multicoil
+check_val_every_n_epoch: 1
+lr: 0.0001
+lr_gamma: 0.1
+lr_step_size: 20
+mask_type: random
+max_epochs: 25
+num_cascades: 8
+resume_from_checkpoint: null
+seed: 42
+sens_chans: 16
+uniform_train_resolution:
+- 384
+- 384
+train_val_split: 0.8
+volume_sample_rate: 1.0
+weight_decay: 0.0
+embed_dim: 66
+patch_size: 1
+window_size: 8
+depths: 
+- 2
+- 2
+- 2
+num_heads:
+- 3
+- 6
+- 12
+mlp_ratio: 2.0
+resi_connection: 1conv
+bottleneck_depth: 2
+bottleneck_heads: 24
+conv_downsample_first: True
+num_adj_slices: 1
+verbose: True
+use_checkpointing: True
