@@ -1,5 +1,8 @@
 # HUMUS-Net
 This is the PyTorch implementation of HUMUS-Net, a Transformer-convolutional **H**ybrid **U**nrolled **Mu**lti-**S**cale **Net**work architecture for accelerated MRI reconstruction.
+> [**HUMUS-Net: Hybrid unrolled multi-scale network architecture for accelerated MRI reconstruction**](https://arxiv.org/abs/2203.08213),  
+> Zalan Fabian, Mahdi Soltanolkotabi  
+> *arXiv preprint (arXiv:2203.08213)*  
 
 ![](assets/humus-net-overview.png)
 
@@ -13,7 +16,7 @@ Reproducible results on the fastMRI multi-coil knee test dataset with x8 acceler
 | [Sigma-Net](https://github.com/khammernik/sigmanet) | 0.8877      | 0.0091           | 36.7           |
 | [i-RIM](https://github.com/pputzky/irim_fastMRI) | 0.8875      | 0.0091           | 36.7           |
 
-*Pre-trained HUMUS-Net models for the [fastMRI Public Leaderboard](https://fastmri.org/leaderboards) submissions can be found below.*
+*[Pre-trained HUMUS-Net](#pre-trained-models) models for the [fastMRI Public Leaderboard](https://fastmri.org/leaderboards) submissions can be found below.*
 
 This repository contains code to train and evaluate HUMUS-Net model on the [fastMRI](https://fastmri.med.nyu.edu/) knee, [Stanford 2D FSE](http://mridata.org/list?project=Stanford%202D%20FSE) and [Stanford Fullysampled 3D FSE Knees](http://mridata.org/list?project=Stanford%20Fullysampled%203D%20FSE%20Knees) datasets.
 
@@ -130,7 +133,15 @@ Alternatively, the `.yaml` files in `humus_examples/experiments` can be customiz
 HUMUS-Net is MIT licensed, as seen in the [LICENSE](LICENSE) file.
 
 ## Citation
-Coming soon.
+If you find our paper useful, please cite
+```bibtex
+@article{fabian2022humus,
+	title={{HUMUS-Net}: {Hybrid} unrolled multi-scale network architecture for accelerated {MRI} reconstruction},
+	author={Fabian, Zalan and Soltanolkotabi, Mahdi},
+	journal={arXiv preprint arXiv:2203.08213},
+	year={2022}
+}
+```
 
 ## Acknowledgments and references
 - [fastMRI repository]( https://github.com/facebookresearch/fastMRI)
