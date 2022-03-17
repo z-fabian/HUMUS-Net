@@ -1,4 +1,6 @@
 # HUMUS-Net
+ 	
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/humus-net-hybrid-unrolled-multi-scale-network/mri-reconstruction-on-fastmri-knee-8x)](https://paperswithcode.com/sota/mri-reconstruction-on-fastmri-knee-8x?p=humus-net-hybrid-unrolled-multi-scale-network)  
 This is the PyTorch implementation of HUMUS-Net, a Transformer-convolutional **H**ybrid **U**nrolled **Mu**lti-**S**cale **Net**work architecture for accelerated MRI reconstruction.
 > [**HUMUS-Net: Hybrid unrolled multi-scale network architecture for accelerated MRI reconstruction**](https://arxiv.org/abs/2203.08213),  
 > Zalan Fabian, Mahdi Soltanolkotabi  
