@@ -34,7 +34,9 @@ To install the necessary packages, create a new virtual environment and run
 ```bash
 git clone https://github.com/z-fabian/HUMUS-Net
 cd HUMUS-Net
+pip3 install wheel
 pip3 install -r requirements.txt
+pip3 install pytorch-lightning==1.3.3
 ```
 
 ## Datasets
