@@ -28,9 +28,11 @@ CUDA-enabled GPU is necessary to run the code. We tested this code using:
 - Ubuntu 18.04
 - CUDA 11.4
 - Python 3.8.5
+- PyTorch 1.10.1
 
 ## Installation
-To install the necessary packages, create a new virtual environment and run
+First, install PyTorch 1.10.1 with CUDA support following the instructions [here](https://pytorch.org/get-started/previous-versions/).
+Then, to install the necessary packages run
 ```bash
 git clone https://github.com/z-fabian/HUMUS-Net
 cd HUMUS-Net

@@ -8,3 +8,4 @@ xmltodict
 einops==0.3.0 
 fastmri==0.1.1
 timm==0.4.12 
+torchmetrics==0.7.3
