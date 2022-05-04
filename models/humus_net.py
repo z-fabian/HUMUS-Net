@@ -73,6 +73,32 @@ class HUMUSNet(nn.Module):
         kspace_pred = torch.chunk(kspace_pred, self.num_adj_slices, dim=1)[center_slice]
         out = fastmri.rss(fastmri.complex_abs(fastmri.ifft2c(kspace_pred)), dim=1)
         return out
+    
+    @staticmethod
+    def load_from_checkpoint(checkpoint_path):
+        checkpoint = torch.load(checkpoint_path)
+        hparams = checkpoint['hyper_parameters']
+        model = HUMUSNet(
+                 num_cascades=hparams['num_cascades'],
+                 img_size=hparams['img_size'], 
+                 patch_size=hparams['patch_size'], 
+                 embed_dim=hparams['embed_dim'], 
+                 depths=hparams['depths'], 
+                 num_heads=hparams['num_heads'],
+                 window_size=hparams['window_size'], 
+                 mlp_ratio=hparams['mlp_ratio'], 
+                 use_checkpoint=hparams['use_checkpoint'] if 'use_checkpoint' in hparams else True, 
+                 resi_connection=hparams['resi_connection'],
+                 bottleneck_depth=hparams['bottleneck_depth'],
+                 bottleneck_heads=hparams['bottleneck_heads'],
+                 conv_downsample_first=hparams['conv_downsample_first'],
+                 num_adj_slices=hparams['num_adj_slices'] if 'num_adj_slices' in hparams else 1,
+                 sens_chans=hparams['sens_chans'],
+            )
+        state_dict = checkpoint['state_dict']
+        state_dict = {'.'.join(k.split('.')[1:]):v for k, v in state_dict.items() if 'model' in k} 
+        model.load_state_dict(state_dict)
+        return model
         
 class VarNetBlock(nn.Module):
     """
