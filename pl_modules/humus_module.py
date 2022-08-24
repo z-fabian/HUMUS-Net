@@ -20,6 +20,7 @@ class HUMUSNetModule(MriModule):
         weight_decay: float = 0.0,
         num_adj_slices: int = 1,
         mask_center: bool = False,
+        logger_type='tb',
         **kwargs,
     ):
         """
@@ -43,6 +44,11 @@ class HUMUSNetModule(MriModule):
             
         super().__init__(num_log_images)
         self.save_hyperparameters()
+        
+        self.logger_type = logger_type
+        if self.logger_type == 'wandb':
+            global wandb
+            import wandb
 
         self.num_cascades = num_cascades
         self.sens_pools = sens_pools
@@ -125,6 +131,14 @@ class HUMUSNetModule(MriModule):
         )
 
         return [optim], [scheduler]
+    
+    def log_image(self, name, image):
+        if self.logger_type == 'wandb':
+            # wandb logging
+            self.logger.experiment.log({name:  wandb.Image(image)})
+        else:
+            # tensorboard logging (default)
+            self.logger.experiment.add_image(name, image, global_step=self.global_step)
 
     @staticmethod
     def add_model_specific_args(parent_parser):  # pragma: no-cover

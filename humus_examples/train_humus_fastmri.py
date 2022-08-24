@@ -56,6 +56,7 @@ def cli_main(args):
             lr_step_size=args.lr_step_size,
             lr_gamma=args.lr_gamma,
             weight_decay=args.weight_decay,
+            logger_type=args.logger_type,
         )
     else:
         raise ValueError('Singlecoil acquisition not supported yet for HUMUS-Net.')
@@ -99,10 +100,18 @@ def cli_main(args):
     # ------------
     # trainer
     # ------------
+    # set up logger
+    if args.logger_type == 'tb':
+        logger = True
+    elif args.logger_type == 'wandb':
+        logger = pl.loggers.WandbLogger(project=args.experiment_name)
+    else:
+        raise ValueError('Unknown logger type.')
     trainer = pl.Trainer.from_argparse_args(args, 
                                             plugins=DDPPlugin(find_unused_parameters=False),
                                             checkpoint_callback=True,
-                                            callbacks=args.checkpoint_callback)
+                                            callbacks=args.checkpoint_callback,
+                                            logger=logger)
     
     # Save all hyperparameters to .yaml file in the current log dir
     if torch.distributed.is_available():
@@ -145,6 +154,18 @@ def build_args():
         default=False,   
         action='store_true',          
         help='If set, print all command line arguments at startup.',
+    )
+    parser.add_argument(
+        '--logger_type', 
+        default='tb',   
+        type=str,          
+        help='Set Pytorch Lightning training logger. Options "tb" - Tensorboard (default), "wandb" - Weights and Biases',
+    )
+    parser.add_argument(
+        '--experiment_name', 
+        default='humus-fastmri-test',   
+        type=str,          
+        help='Used with wandb logger to define the project name.',
     )
 
     # data transform params
