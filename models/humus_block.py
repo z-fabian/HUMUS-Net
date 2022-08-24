@@ -6,8 +6,6 @@ We use parts of the code from
 SwinIR (https://github.com/JingyunLiang/SwinIR/blob/main/models/network_swinir.py)
 Swin-Unet (https://github.com/HuCaoFighting/Swin-Unet/blob/main/networks/swin_transformer_unet_skip_expand_decoder_sys.py)
 """
-import copy
-import math
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -680,13 +678,13 @@ class HUMUSBlock(nn.Module):
                  norm_layer=nn.LayerNorm, 
                  ape=False, 
                  patch_norm=True,
-                 use_checkpoint=False, 
                  img_range=1., 
                  resi_connection='1conv',
                  bottleneck_depth=2,
                  bottleneck_heads=24,
                  conv_downsample_first=True,
                  out_chans=None,
+                 no_residual_learning=False,
                  **kwargs):
         super(HUMUSBlock, self).__init__()
         num_in_ch = in_chans
@@ -698,6 +696,7 @@ class HUMUSBlock(nn.Module):
         self.mean = torch.zeros(1, 1, 1, 1)
         self.window_size = window_size
         self.conv_downsample_first = conv_downsample_first
+        self.no_residual_learning = no_residual_learning
         
         #####################################################################################################
         ################################### 1, input block ###################################
@@ -918,9 +917,13 @@ class HUMUSBlock(nn.Module):
             res = self.conv_up_block(res)
 
             res = self.conv_last(res)
-            if self.center_slice_out:
-                x = x[:, center_slice, ...].unsqueeze(1) 
-            x = x + res
+
+            if self.no_residual_learning: 
+                x = res
+            else:
+                if self.center_slice_out:
+                    x = x[:, center_slice, ...].unsqueeze(1) 
+                x = x + res
         else:
             x_first = self.conv_first(x)
             res = self.conv_after_body(self.forward_features(x_first)) + x_first

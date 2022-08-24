@@ -148,9 +148,9 @@ class VarNetBlock(nn.Module):
     @staticmethod
     def norm(x: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         # group norm
-        b, c, h, w = x.shape
+        b, c, h, w = x.shape # 1, 3 * 2, h, w
         #x = x.view(b, 2, c // 2 * h * w)
-        x = x.view(b, c, h * w)
+        x = x.view(b, c, h * w) # 1, 6, h * w
 
         mean = x.mean(dim=2).view(b, c, 1, 1)
         std = x.std(dim=2).view(b, c, 1, 1)

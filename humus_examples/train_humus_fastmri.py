@@ -56,6 +56,7 @@ def cli_main(args):
             lr_step_size=args.lr_step_size,
             lr_gamma=args.lr_gamma,
             weight_decay=args.weight_decay,
+            no_residual_learning=args.no_residual_learning
         )
     else:
         raise ValueError('Singlecoil acquisition not supported yet for HUMUS-Net.')
@@ -180,17 +181,6 @@ def build_args():
 
     # module config
     parser = HUMUSNetModule.add_model_specific_args(parser)
-    parser.set_defaults(
-        num_cascades=6,  # number of unrolled iterations
-        pools=4,  # number of pooling layers for U-Net
-        chans=18,  # number of top-level channels for U-Net
-        sens_pools=4,  # number of pooling layers for sense est. U-Net
-        sens_chans=8,  # number of top-level channels for sense est. U-Net
-        lr=0.0003,  # Adam learning rate
-        lr_step_size=40,  # epoch at which to decrease learning rate
-        lr_gamma=0.1,  # extent to which to decrease learning rate
-        weight_decay=0.0,  # weight regularization strength
-    )
 
     # trainer config
     parser = pl.Trainer.add_argparse_args(parser)

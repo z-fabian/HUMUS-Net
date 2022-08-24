@@ -11,15 +11,10 @@ class HUMUSNetModule(MriModule):
 
     def __init__(
         self,
-        num_cascades: int = 8,
-        sens_pools: int = 4,
-        sens_chans: int = 16,
         lr: float = 0.0001,
         lr_step_size: int = 40,
         lr_gamma: float = 0.1,
         weight_decay: float = 0.0,
-        num_adj_slices: int = 1,
-        mask_center: bool = False,
         **kwargs,
     ):
         """
@@ -44,25 +39,13 @@ class HUMUSNetModule(MriModule):
         super().__init__(num_log_images)
         self.save_hyperparameters()
 
-        self.num_cascades = num_cascades
-        self.sens_pools = sens_pools
-        self.sens_chans = sens_chans
-        self.num_adj_slices = num_adj_slices
-        self.mask_center = mask_center
         self.lr = lr
         self.lr_step_size = lr_step_size
         self.lr_gamma = lr_gamma
         self.weight_decay = weight_decay
 
-        self.model = HUMUSNet(
-            num_cascades=self.num_cascades,
-            sens_chans=self.sens_chans,
-            sens_pools=self.sens_pools,
-            num_adj_slices=self.num_adj_slices,
-            mask_center=self.mask_center,
-            **kwargs,
-        )
-
+        self.model = HUMUSNet(**kwargs)
+        
         self.loss = fastmri.SSIMLoss()
 
     def forward(self, masked_kspace, mask):
@@ -202,6 +185,12 @@ class HUMUSNetModule(MriModule):
             default=False,   
             action='store_true',          
             help='If set, checkpointing is used to save GPU memory.',
+        )
+        parser.add_argument(
+            '--no_residual_learning',
+            default=False,
+            action='store_true',
+            help='By default, residual image is denoised in MUST. Setting this flag will turn off the residual path.',
         )
 
         # training params (opt)
