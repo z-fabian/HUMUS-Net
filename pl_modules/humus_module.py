@@ -15,6 +15,12 @@ class HUMUSNetModule(MriModule):
         lr_step_size: int = 40,
         lr_gamma: float = 0.1,
         weight_decay: float = 0.0,
+<<<<<<< HEAD
+=======
+        num_adj_slices: int = 1,
+        mask_center: bool = False,
+        logger_type='tb',
+>>>>>>> ba588a83d06058bda26f4e5787d89e15a8314c9e
         **kwargs,
     ):
         """
@@ -38,6 +44,11 @@ class HUMUSNetModule(MriModule):
             
         super().__init__(num_log_images)
         self.save_hyperparameters()
+        
+        self.logger_type = logger_type
+        if self.logger_type == 'wandb':
+            global wandb
+            import wandb
 
         self.lr = lr
         self.lr_step_size = lr_step_size
@@ -108,6 +119,14 @@ class HUMUSNetModule(MriModule):
         )
 
         return [optim], [scheduler]
+    
+    def log_image(self, name, image):
+        if self.logger_type == 'wandb':
+            # wandb logging
+            self.logger.experiment.log({name:  wandb.Image(image)})
+        else:
+            # tensorboard logging (default)
+            self.logger.experiment.add_image(name, image, global_step=self.global_step)
 
     @staticmethod
     def add_model_specific_args(parent_parser):  # pragma: no-cover
