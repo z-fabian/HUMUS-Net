@@ -927,10 +927,13 @@ class HUMUSBlock(nn.Module):
         else:
             x_first = self.conv_first(x)
             res = self.conv_after_body(self.forward_features(x_first)) + x_first
-
-            if self.center_slice_out:
-                x = x[:, center_slice, ...].unsqueeze(1) 
-            x = x + self.conv_last(res)
+            
+            if self.no_residual_learning: 
+                x = self.conv_last(res)
+            else:
+                if self.center_slice_out:
+                    x = x[:, center_slice, ...].unsqueeze(1) 
+                x = x + self.conv_last(res)
         
         if self.center_slice_out:
             x = x / self.img_range + self.mean[:, center_slice, ...].unsqueeze(1)
