@@ -15,12 +15,9 @@ class HUMUSNetModule(MriModule):
         lr_step_size: int = 40,
         lr_gamma: float = 0.1,
         weight_decay: float = 0.0,
-<<<<<<< HEAD
-=======
         num_adj_slices: int = 1,
         mask_center: bool = False,
         logger_type='tb',
->>>>>>> ba588a83d06058bda26f4e5787d89e15a8314c9e
         **kwargs,
     ):
         """

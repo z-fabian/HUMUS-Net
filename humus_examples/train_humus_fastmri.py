@@ -56,11 +56,8 @@ def cli_main(args):
             lr_step_size=args.lr_step_size,
             lr_gamma=args.lr_gamma,
             weight_decay=args.weight_decay,
-<<<<<<< HEAD
             no_residual_learning=args.no_residual_learning
-=======
             logger_type=args.logger_type,
->>>>>>> ba588a83d06058bda26f4e5787d89e15a8314c9e
         )
     else:
         raise ValueError('Singlecoil acquisition not supported yet for HUMUS-Net.')
