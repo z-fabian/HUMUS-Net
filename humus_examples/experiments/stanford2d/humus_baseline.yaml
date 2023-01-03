@@ -15,7 +15,7 @@ resume_from_checkpoint: null
 seed: 42
 sens_chans: 16
 uniform_train_resolution:
-- 384
+- 512
 - 384
 train_val_split: 0.8
 volume_sample_rate: 1.0
