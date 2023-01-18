@@ -110,8 +110,7 @@ To evaluate a model trained on fastMRI knee data on the validation dataset, run
 ```bash
 python3 humus_examples/eval_humus_fastmri.py \
 --checkpoint_file CHECKPOINT \
---data_path DATA_DIR \
---gpus NUM_GPUS \
+--data_path DATA_DIR
 ```
 - `CHECKPOINT`: path to the model checkpoint `.ckpt` file
 
