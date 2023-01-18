@@ -95,7 +95,6 @@ def build_args():
 
     # basic args
     backend = "ddp"
-    num_gpus = 2 if backend == "ddp" else 1
     batch_size = 1
     
     # client arguments
@@ -143,7 +142,7 @@ def build_args():
     # trainer config
     parser = pl.Trainer.add_argparse_args(parser)
     parser.set_defaults(
-        gpus=num_gpus,  # number of gpus to use
+        gpus=1,  # number of gpus to use
         replace_sampler_ddp=False,  # this is necessary for volume dispatch during val
         accelerator=backend,  # what distributed version to use
         seed=42,  # random seed

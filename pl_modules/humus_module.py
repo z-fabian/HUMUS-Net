@@ -124,6 +124,14 @@ class HUMUSNetModule(MriModule):
         else:
             # tensorboard logging (default)
             self.logger.experiment.add_image(name, image, global_step=self.global_step)
+            
+    @staticmethod
+    def load_from_checkpoint(checkpoint_path):
+        checkpoint = torch.load(checkpoint_path)
+        hparams = checkpoint['hyper_parameters']
+        humus_module = HUMUSNetModule(**hparams)
+        humus_module.model = HUMUSNet.load_from_checkpoint(checkpoint_path)
+        return humus_module
 
     @staticmethod
     def add_model_specific_args(parent_parser):  # pragma: no-cover
