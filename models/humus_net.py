@@ -94,7 +94,9 @@ class HUMUSNet(nn.Module):
                  conv_downsample_first=hparams['conv_downsample_first'],
                  num_adj_slices=hparams['num_adj_slices'] if 'num_adj_slices' in hparams else 1,
                  sens_chans=hparams['sens_chans'],
+                 no_residual_learning=hparams['no_residual_learning'] if 'no_residual_learning' in hparams else False,
             )
+
         state_dict = checkpoint['state_dict']
         state_dict = {'.'.join(k.split('.')[1:]):v for k, v in state_dict.items() if 'model' in k} 
         model.load_state_dict(state_dict)

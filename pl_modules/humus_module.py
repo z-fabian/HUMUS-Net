@@ -118,12 +118,13 @@ class HUMUSNetModule(MriModule):
         return [optim], [scheduler]
     
     def log_image(self, name, image):
-        if self.logger_type == 'wandb':
-            # wandb logging
-            self.logger.experiment.log({name:  wandb.Image(image)})
-        else:
-            # tensorboard logging (default)
-            self.logger.experiment.add_image(name, image, global_step=self.global_step)
+        if self.logger is not None:
+            if self.logger_type == 'wandb':
+                # wandb logging
+                self.logger.experiment.log({name:  wandb.Image(image)})
+            else:
+                # tensorboard logging (default)
+                self.logger.experiment.add_image(name, image, global_step=self.global_step)
             
     @staticmethod
     def load_from_checkpoint(checkpoint_path):

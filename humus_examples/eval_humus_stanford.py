@@ -82,7 +82,7 @@ def cli_main(args):
     # ------------
     # trainer
     # ------------
-    trainer = pl.Trainer.from_argparse_args(args, plugins=DDPPlugin(find_unused_parameters=False))
+    trainer = pl.Trainer.from_argparse_args(args, plugins=DDPPlugin(find_unused_parameters=False), logger=False)
         
     # ------------
     # run
