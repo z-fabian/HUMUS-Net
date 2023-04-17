@@ -3,11 +3,9 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/humus-net-hybrid-unrolled-multi-scale-network/mri-reconstruction-on-fastmri-knee-8x)](https://paperswithcode.com/sota/mri-reconstruction-on-fastmri-knee-8x?p=humus-net-hybrid-unrolled-multi-scale-network)  
 This is the PyTorch implementation of the NeurIPS 2022 paper *HUMUS-Net, a Transformer-convolutional **H**ybrid **U**nrolled **Mu**lti-**S**cale **Net**work architecture for accelerated MRI reconstruction*.
 
-> [**HUMUS-Net: Hybrid unrolled multi-scale network architecture for accelerated MRI reconstruction**](https://arxiv.org/abs/2203.08213),  
+> [**HUMUS-Net: Hybrid unrolled multi-scale network architecture for accelerated MRI reconstruction**](https://proceedings.neurips.cc/paper_files/paper/2022/hash/a1bb3f96e255ae1e04325ae166bcef0f-Abstract-Conference.html),  
 > Zalan Fabian, Berk Tınaz, Mahdi Soltanolkotabi  
-> *arXiv preprint (arXiv:2203.08213)*  
-
-NeurIPS 2022 version with additional experiments and ablation studies coming soon.
+> *NeurIPS 2022*  
 
 ![](assets/humus-net-overview.png)
 
@@ -175,10 +173,12 @@ If you find our paper useful, please cite
 
 ```bibtex
 @article{fabian2022humus,
-    title={{HUMUS-Net}: {Hybrid} unrolled multi-scale network architecture for accelerated {MRI} reconstruction},
-    author={Fabian, Zalan and Soltanolkotabi, Mahdi},
-    journal={arXiv preprint arXiv:2203.08213},
-    year={2022}
+  title={{HUMUS-Net}: Hybrid Unrolled Multi-scale Network Architecture for Accelerated {MRI} Reconstruction},
+  author={Fabian, Zalan and Tinaz, Berk and Soltanolkotabi, Mahdi},
+  journal={Advances in Neural Information Processing Systems},
+  volume={35},
+  pages={25306--25319},
+  year={2022}
 }
 ```
 
