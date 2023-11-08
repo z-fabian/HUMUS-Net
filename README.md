@@ -120,6 +120,8 @@ Here you can find checkpoint files for the models submitted to the fastMRI Publi
 | fastMRI Knee | default | train+val  | x8           | 1.4G            | [Download](https://drive.google.com/file/d/14r23_yrpB3f_Jq9eOYcd_X9-dXk6Dpk3/view?usp=sharing) |
 | fastMRI Knee | large   | train      | x8           | 2.8G            | [Download](https://drive.google.com/file/d/1GG3j29_hjJ5QQhCA6M1rIJdvuA-Ad1u9/view?usp=sharing) |
 | fastMRI Knee | large   | train+val  | x8           | 2.8G            | [Download](https://drive.google.com/file/d/1RnxoFPhmwqIyw4V8DxUST1QsxX5NjWoz/view?usp=sharing) |
+| Stanford 2D FSE| default | seed 0 split | x8          | 1.4G            | [Download](https://drive.google.com/file/d/1KlOverxvE3xNosnYurFbtab8FYHsJ5pt/view?usp=sharing) |
+| Stanford 3D FSE Knees| default | seed 0 split | x8          | 1.4G            | [Download](https://drive.google.com/file/d/1V-Zs10eGWhpKLUHwtL9ytb7KCGYqOxcA/view?usp=sharing) |
 
 ## Evaluating models
 
